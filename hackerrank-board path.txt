@@ -1,0 +1,67 @@
+ques:
+1.Take as input N, a number. N is the size of a 1 dimensional snakes and ladder board (without any snakes and ladders).
+
+2.Take as input M, a number. M is the number of faces of the dice.
+
+a. Write a recursive function which returns the count of different ways the board can be travelled using the dice. Print the value returned.
+
+b. Write a recursive function which returns an ArrayList of dice values for all valid paths across the board. Print the value returned.
+
+Input Format
+
+Two integers n,m
+
+Constraints
+
+1<= n <=1000000000
+
+Output Format
+
+print number of total paths
+
+print all the paths
+
+Sample Input 0
+
+5
+6
+Sample Output 0
+
+16
+[11111, 1112, 1121, 113, 1211, 122, 131, 14, 2111, 212, 221, 23, 311, 32, 41, 5]
+
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scn=new Scanner(System.in);
+        int n =scn.nextInt();
+        int m=scn.nextInt();
+        ArrayList<String>paths=getPath(0,n,m);
+        System.out.println(paths.size());
+        System.out.println(paths);
+        
+    }
+    public static ArrayList<String>getPath(int sp ,int ep, int m){
+        
+      if(sp==ep){
+          ArrayList<String>bans=new ArrayList<>();
+          bans.add("");
+          return bans;
+      }  
+       //I will use the proactive approach
+        ArrayList<String>myans=new ArrayList<>();
+        
+       for(int k=1;sp+k<=ep && k<=m;k++) {
+           ArrayList<String>hntod=getPath(sp+k,ep,m);
+           
+           for(int i=0;i<hntod.size();i++){
+               myans.add(k+hntod.get(i));
+}
+}
+        return myans;
+}
+}
